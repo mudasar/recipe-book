@@ -4,17 +4,33 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './header.component';
+import {CommonModule} from "@angular/common";
+import {RecipesModule} from "./recipes/recipes.module";
+import { HomeComponent } from './home/home.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import {appRoutes, appRoutingProviders} from "./app.routing";
+import { ShoppingListModule } from './shopping-list/shopping-list.module';
+import { DropdownDirective } from './dropdown.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    HomeComponent,
+    PagenotfoundComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+      CommonModule,
+      appRoutes,
+      RecipesModule,
+      ShoppingListModule
   ],
-  providers: [],
+  providers: [appRoutingProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
