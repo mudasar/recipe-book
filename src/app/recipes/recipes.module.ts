@@ -8,9 +8,10 @@ import {CommonModule} from "@angular/common";
 import {RecipeService} from "./recipe.service";
 import { RecipeStartComponent } from './recipe-start.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
+import {     ReactiveFormsModule, FormsModule} from "@angular/forms";
 
 @NgModule({
-    imports:[CommonModule, recipesRoutes],
+    imports:[CommonModule, FormsModule,ReactiveFormsModule, recipesRoutes],
     declarations:[RecipesComponent, RecipeListComponent, RecipeItemComponent, RecipedetailComponent, RecipeStartComponent, RecipeEditComponent],
     exports: [RecipesComponent],
     providers: [RecipeService]

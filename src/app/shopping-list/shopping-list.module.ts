@@ -4,9 +4,10 @@ import {shoppingRoutes} from "./shopping-list.routing";
 import { ShoppingListAddComponent } from './shopping-list-add.component';
 import {CommonModule} from "@angular/common";
 import {ShoppingListService} from "./shopping-list.service";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
-    imports:[CommonModule, shoppingRoutes],
+    imports:[CommonModule, FormsModule, shoppingRoutes],
     declarations:[ShoppingListComponent, ShoppingListAddComponent, ShoppingListAddComponent],
     exports:[ShoppingListComponent],
     providers: [ShoppingListService]
