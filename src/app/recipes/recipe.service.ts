@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {Recipe} from "./recipe";
 import {Ingredient} from "../shared/ingredient";
+import {Headers, Http, Response} from "@angular/http";
+import 'rxjs';
 
 @Injectable()
 export class RecipeService {
 
-  constructor() { }
+    recipesChanged = new EventEmitter();
+  constructor(private http:Http) { }
   private recipes: Recipe[] = [
     new Recipe("Achari Qeema", "Qeema made with achar and other spices, very hot", "http://2.bp.blogspot.com/-TlNWh0_hHAo/UTqGbHzyhZI/AAAAAAAAA_A/yxGqaXmSO1c/s1600/Qeema+(3).jpg",[
         new Ingredient("Goat mince", 1),
@@ -39,4 +42,21 @@ export class RecipeService {
     editRecipe(recipe: Recipe, newRecipe: Recipe) {
         this.recipes[this.recipes.indexOf(recipe)] = newRecipe;
     }
+
+    storeData(){
+        const body = JSON.stringify(this.recipes);
+        const headers = new Headers({'Content-Type':'application/json'});
+        return this.http.put('https://recipebook-2aa31.firebaseio.com/recipes.json',body,{headers:headers}).map((data:Response)=> data.json());
+    }
+
+    fetchData(){
+        return this.http.get('https://recipebook-2aa31.firebaseio.com/recipes.json').
+        map((response:Response)=>response.json())
+            .subscribe((data: Recipe[])=>{
+            this.recipes = data;
+                console.log(data);
+                this.recipesChanged.emit(this.recipes);
+        });
+    }
+
 }
